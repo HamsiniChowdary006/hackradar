@@ -14,7 +14,126 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      hackathons: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string
+          description: string | null
+          event_end: string | null
+          event_start: string | null
+          fee: string | null
+          id: string
+          is_active: boolean
+          mode: string
+          registration_deadline: string | null
+          scraped_at: string | null
+          skill_level: string
+          source_platform: string
+          source_url: string
+          tags: string[] | null
+          title: string
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          description?: string | null
+          event_end?: string | null
+          event_start?: string | null
+          fee?: string | null
+          id?: string
+          is_active?: boolean
+          mode: string
+          registration_deadline?: string | null
+          scraped_at?: string | null
+          skill_level: string
+          source_platform: string
+          source_url: string
+          tags?: string[] | null
+          title: string
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          description?: string | null
+          event_end?: string | null
+          event_start?: string | null
+          fee?: string | null
+          id?: string
+          is_active?: boolean
+          mode?: string
+          registration_deadline?: string | null
+          scraped_at?: string | null
+          skill_level?: string
+          source_platform?: string
+          source_url?: string
+          tags?: string[] | null
+          title?: string
+        }
+        Relationships: []
+      }
+      pending_submissions: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string
+          description: string | null
+          event_end: string | null
+          event_start: string | null
+          fee: string | null
+          id: string
+          mode: string | null
+          registration_deadline: string | null
+          skill_level: string | null
+          source_platform: string | null
+          source_url: string
+          status: string
+          submitter_email: string | null
+          tags: string[] | null
+          title: string
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          description?: string | null
+          event_end?: string | null
+          event_start?: string | null
+          fee?: string | null
+          id?: string
+          mode?: string | null
+          registration_deadline?: string | null
+          skill_level?: string | null
+          source_platform?: string | null
+          source_url: string
+          status?: string
+          submitter_email?: string | null
+          tags?: string[] | null
+          title: string
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          description?: string | null
+          event_end?: string | null
+          event_start?: string | null
+          fee?: string | null
+          id?: string
+          mode?: string | null
+          registration_deadline?: string | null
+          skill_level?: string | null
+          source_platform?: string | null
+          source_url?: string
+          status?: string
+          submitter_email?: string | null
+          tags?: string[] | null
+          title?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

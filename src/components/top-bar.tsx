@@ -1,0 +1,47 @@
+import { Bell, Moon, Search, Sun, User } from "lucide-react";
+import { useTheme } from "./theme-provider";
+
+export function TopBar({
+  search,
+  onSearch,
+}: {
+  search?: string;
+  onSearch?: (v: string) => void;
+}) {
+  const { theme, toggle } = useTheme();
+  return (
+    <header className="sticky top-0 z-20 backdrop-blur-md bg-background/70 border-b border-border/50">
+      <div className="px-4 md:px-8 py-4 flex items-center gap-3 md:gap-5 max-w-[1400px] mx-auto">
+        <div className="flex-1 max-w-xl">
+          <div className="neu-inset flex items-center gap-3 px-4 py-2.5">
+            <Search className="w-4 h-4 text-muted-foreground shrink-0" />
+            <input
+              type="text"
+              placeholder="Search hackathons, tags, cities..."
+              value={search ?? ""}
+              onChange={(e) => onSearch?.(e.target.value)}
+              className="bg-transparent outline-none text-sm w-full placeholder:text-muted-foreground"
+            />
+          </div>
+        </div>
+        <button
+          onClick={toggle}
+          aria-label="Toggle theme"
+          className="w-11 h-11 rounded-2xl grid place-items-center neu-pressable text-foreground"
+        >
+          {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+        </button>
+        <button
+          aria-label="Notifications"
+          className="w-11 h-11 rounded-2xl grid place-items-center neu-pressable text-foreground relative"
+        >
+          <Bell className="w-4 h-4" />
+          <span className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-primary" />
+        </button>
+        <div className="w-11 h-11 rounded-2xl grid place-items-center neu-card-sm">
+          <User className="w-4 h-4 text-muted-foreground" />
+        </div>
+      </div>
+    </header>
+  );
+}

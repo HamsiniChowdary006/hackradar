@@ -72,6 +72,30 @@ function SubmitPage() {
     navigate({ to: "/" });
   };
 
+  if (!loading && !user) {
+    return (
+      <AppShell search={search} onSearch={setSearch}>
+        <div className="neu-card p-12 text-center space-y-4 max-w-lg mx-auto mt-10">
+          <div className="w-14 h-14 mx-auto rounded-2xl neu-card-sm grid place-items-center text-primary">
+            <Lock className="w-6 h-6" />
+          </div>
+          <div>
+            <div className="text-lg font-bold">Log in to submit a hackathon</div>
+            <p className="text-sm text-muted-foreground mt-1">
+              Signed-in submissions help us keep spam out and follow up with you.
+            </p>
+          </div>
+          <button
+            onClick={() => openAuth("signin")}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-primary text-primary-foreground text-sm font-semibold shadow-neu-sm hover:opacity-95"
+          >
+            Log in to continue
+          </button>
+        </div>
+      </AppShell>
+    );
+  }
+
   return (
     <AppShell search={search} onSearch={setSearch}>
       <div className="mb-8 max-w-2xl">
@@ -83,6 +107,7 @@ function SubmitPage() {
           Know of a great event we're missing? Send it in — we manually review every submission.
         </p>
       </div>
+
 
       <form onSubmit={onSubmit} className="neu-card p-6 md:p-8 space-y-5 max-w-3xl">
         <Field label="Hackathon title *">

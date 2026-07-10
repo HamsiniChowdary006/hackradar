@@ -6,6 +6,7 @@ import { AppShell } from "@/components/app-shell";
 import { StatCard } from "@/components/stat-card";
 import { HackathonListing } from "@/components/hackathon-listing";
 import { hackathonsQuery, daysUntil } from "@/lib/hackathons";
+import { useHydrated } from "@/lib/use-hydrated";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(hackathonsQuery),

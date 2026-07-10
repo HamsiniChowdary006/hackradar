@@ -1,5 +1,10 @@
-import { Calendar, ExternalLink, MapPin, Radio } from "lucide-react";
+import { Bookmark, Calendar, ExternalLink, MapPin, Radio } from "lucide-react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { daysUntil, type Hackathon } from "@/lib/hackathons";
+import { savedHackathonIdsQuery, toggleBookmark } from "@/lib/bookmarks";
+import { useAuth } from "@/lib/auth-context";
+import { useHydrated } from "@/lib/use-hydrated";
 
 const skillColor: Record<string, string> = {
   Beginner: "bg-success/15 text-success",
@@ -20,7 +25,13 @@ export function HackathonCard({
   h: Hackathon;
   onOpen: (h: Hackathon) => void;
 }) {
-  const days = daysUntil(h.registration_deadline);
+  const hydrated = useHydrated();
+  const { user, openAuth } = useAuth();
+  const qc = useQueryClient();
+  const { data: savedIds = [] } = useQuery(savedHackathonIdsQuery(user?.id));
+  const isSaved = savedIds.includes(h.id);
+
+  const days = hydrated ? daysUntil(h.registration_deadline) : null;
   const location =
     h.mode === "Online" ? "Online" : [h.city, h.country].filter(Boolean).join(", ") || "TBA";
 
@@ -37,23 +48,44 @@ export function HackathonCard({
               ? { label: `${days}d left`, cls: "bg-warning/15 text-warning" }
               : { label: `${days}d left`, cls: "bg-success/15 text-success" };
 
+  const handleBookmark = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!user) return openAuth("signin");
+    try {
+      await toggleBookmark(user.id, h.id, isSaved);
+      qc.invalidateQueries({ queryKey: ["saved-hackathons"] });
+      toast.success(isSaved ? "Removed from saved" : "Saved!");
+    } catch (err) {
+      toast.error("Couldn't update bookmark.");
+    }
+  };
+
   return (
     <article className="neu-card p-6 flex flex-col gap-4 h-full">
       <div className="flex items-start justify-between gap-3">
         <span className="text-[10px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-full neu-card-sm text-muted-foreground">
           {h.source_platform}
         </span>
-        {deadlineChip && (
-          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${deadlineChip.cls}`}>
-            {deadlineChip.label}
-          </span>
-        )}
+        <div className="flex items-center gap-2">
+          {deadlineChip && (
+            <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${deadlineChip.cls}`}>
+              {deadlineChip.label}
+            </span>
+          )}
+          <button
+            onClick={handleBookmark}
+            aria-label={isSaved ? "Remove bookmark" : "Save hackathon"}
+            className={
+              "w-8 h-8 rounded-xl grid place-items-center neu-pressable transition " +
+              (isSaved ? "text-primary" : "text-muted-foreground")
+            }
+          >
+            <Bookmark className={"w-4 h-4 " + (isSaved ? "fill-current" : "")} />
+          </button>
+        </div>
       </div>
 
-      <button
-        onClick={() => onOpen(h)}
-        className="text-left group min-w-0"
-      >
+      <button onClick={() => onOpen(h)} className="text-left group min-w-0">
         <h3 className="text-lg font-bold leading-snug group-hover:text-primary transition-colors line-clamp-2">
           {h.title}
         </h3>
@@ -81,9 +113,7 @@ export function HackathonCard({
         {h.event_start && (
           <div className="flex items-center gap-2">
             <Calendar className="w-3.5 h-3.5 shrink-0" />
-            <span className="truncate">
-              {formatRange(h.event_start, h.event_end)}
-            </span>
+            <span className="truncate">{formatRange(h.event_start, h.event_end)}</span>
           </div>
         )}
       </div>
@@ -111,9 +141,9 @@ export function HackathonCard({
 
 function formatRange(start: string, end: string | null) {
   const s = new Date(start + "T00:00:00");
-  const opts: Intl.DateTimeFormatOptions = { month: "short", day: "numeric" };
-  const sStr = s.toLocaleDateString(undefined, opts);
+  const opts: Intl.DateTimeFormatOptions = { month: "short", day: "numeric", timeZone: "UTC" };
+  const sStr = s.toLocaleDateString("en-US", opts);
   if (!end || end === start) return sStr;
   const e = new Date(end + "T00:00:00");
-  return `${sStr} – ${e.toLocaleDateString(undefined, opts)}`;
+  return `${sStr} – ${e.toLocaleDateString("en-US", opts)}`;
 }

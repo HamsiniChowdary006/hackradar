@@ -1,24 +1,76 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Suspense, useState } from "react";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { CalendarClock, Globe2, MapPin, Radar } from "lucide-react";
+import { AppShell } from "@/components/app-shell";
+import { StatCard } from "@/components/stat-card";
+import { HackathonListing } from "@/components/hackathon-listing";
+import { hackathonsQuery, daysUntil } from "@/lib/hackathons";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  loader: ({ context }) => context.queryClient.ensureQueryData(hackathonsQuery),
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function HomePage() {
+  const [search, setSearch] = useState("");
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <AppShell search={search} onSearch={setSearch}>
+      <div className="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-3">
+        <div>
+          <div className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-2">
+            Dashboard
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+            Every hackathon, one feed.
+          </h1>
+          <p className="text-sm text-muted-foreground mt-2 max-w-lg">
+            HackRadar aggregates hackathons and tech events from Devpost, Unstop, HackerEarth,
+            Devfolio, MLH, Eventbrite and Hack2Skill — so you never miss an opportunity.
+          </p>
+        </div>
+      </div>
+
+      <Suspense fallback={<StatsSkeleton />}>
+        <StatsRow />
+      </Suspense>
+
+      <div className="mt-10 mb-4 flex items-center justify-between">
+        <h2 className="text-lg font-bold">Upcoming hackathons</h2>
+      </div>
+      <Suspense fallback={<div className="neu-card p-10 text-center text-muted-foreground">Loading…</div>}>
+        <HackathonListing search={search} />
+      </Suspense>
+    </AppShell>
+  );
+}
+
+function StatsRow() {
+  const { data } = useSuspenseQuery(hackathonsQuery);
+  const total = data.length;
+  const closingWeek = data.filter((h) => {
+    const d = daysUntil(h.registration_deadline);
+    return d !== null && d >= 0 && d <= 7;
+  }).length;
+  const online = data.filter((h) => h.mode === "Online").length;
+  const offline = data.filter((h) => h.mode === "Offline" || h.mode === "Hybrid").length;
+
+  return (
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+      <StatCard label="Hackathons tracked" value={total} icon={Radar} trend="+12%" accent="primary" />
+      <StatCard label="Closing this week" value={closingWeek} icon={CalendarClock} accent="warning" />
+      <StatCard label="Online events" value={online} icon={Globe2} accent="success" />
+      <StatCard label="Offline / hybrid" value={offline} icon={MapPin} accent="muted" />
+    </div>
+  );
+}
+
+function StatsSkeleton() {
+  return (
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div key={i} className="neu-card p-6 h-32 animate-pulse" />
+      ))}
     </div>
   );
 }

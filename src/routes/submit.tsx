@@ -4,7 +4,8 @@ import { toast } from "sonner";
 import { AppShell } from "@/components/app-shell";
 import { supabase } from "@/integrations/supabase/client";
 import { SOURCE_PLATFORMS } from "@/lib/hackathons";
-import { Send } from "lucide-react";
+import { Lock, Send } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
 
 export const Route = createFileRoute("/submit")({
   head: () => ({
@@ -19,6 +20,7 @@ export const Route = createFileRoute("/submit")({
 function SubmitPage() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+  const { user, openAuth, loading } = useAuth();
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     title: "",

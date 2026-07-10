@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SubmitRouteImport } from './routes/submit'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SavedRouteImport } from './routes/saved'
 import { Route as HelpRouteImport } from './routes/help'
 import { Route as BrowseRouteImport } from './routes/browse'
@@ -25,6 +26,11 @@ const SubmitRoute = SubmitRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SavedRoute = SavedRouteImport.update({
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/browse': typeof BrowseRoute
   '/help': typeof HelpRoute
   '/saved': typeof SavedRoute
+  '/settings': typeof SettingsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/browse': typeof BrowseRoute
   '/help': typeof HelpRoute
   '/saved': typeof SavedRoute
+  '/settings': typeof SettingsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/browse': typeof BrowseRoute
   '/help': typeof HelpRoute
   '/saved': typeof SavedRoute
+  '/settings': typeof SettingsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/browse'
     | '/help'
     | '/saved'
+    | '/settings'
     | '/sitemap.xml'
     | '/submit'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/browse'
     | '/help'
     | '/saved'
+    | '/settings'
     | '/sitemap.xml'
     | '/submit'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/browse'
     | '/help'
     | '/saved'
+    | '/settings'
     | '/sitemap.xml'
     | '/submit'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   BrowseRoute: typeof BrowseRoute
   HelpRoute: typeof HelpRoute
   SavedRoute: typeof SavedRoute
+  SettingsRoute: typeof SettingsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SubmitRoute: typeof SubmitRoute
 }
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/saved': {
@@ -181,9 +201,20 @@ const rootRouteChildren: RootRouteChildren = {
   BrowseRoute: BrowseRoute,
   HelpRoute: HelpRoute,
   SavedRoute: SavedRoute,
+  SettingsRoute: SettingsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SubmitRoute: SubmitRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

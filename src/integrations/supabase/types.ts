@@ -74,6 +74,71 @@ export type Database = {
         }
         Relationships: []
       }
+      notification_preferences: {
+        Row: {
+          deadline_reminders_enabled: boolean
+          modes: string[]
+          preferred_location: string | null
+          skill_levels: string[]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          deadline_reminders_enabled?: boolean
+          modes?: string[]
+          preferred_location?: string | null
+          skill_levels?: string[]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          deadline_reminders_enabled?: boolean
+          modes?: string[]
+          preferred_location?: string | null
+          skill_levels?: string[]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          hackathon_id: string | null
+          id: string
+          is_read: boolean
+          kind: string
+          message: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          hackathon_id?: string | null
+          id?: string
+          is_read?: boolean
+          kind?: string
+          message: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          hackathon_id?: string | null
+          id?: string
+          is_read?: boolean
+          kind?: string
+          message?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_hackathon_id_fkey"
+            columns: ["hackathon_id"]
+            isOneToOne: false
+            referencedRelation: "hackathons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       pending_submissions: {
         Row: {
           city: string | null
@@ -133,6 +198,62 @@ export type Database = {
           title?: string
         }
         Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      saved_hackathons: {
+        Row: {
+          hackathon_id: string
+          id: string
+          saved_at: string
+          user_id: string
+        }
+        Insert: {
+          hackathon_id: string
+          id?: string
+          saved_at?: string
+          user_id: string
+        }
+        Update: {
+          hackathon_id?: string
+          id?: string
+          saved_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_hackathons_hackathon_id_fkey"
+            columns: ["hackathon_id"]
+            isOneToOne: false
+            referencedRelation: "hackathons"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

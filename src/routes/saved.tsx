@@ -1,9 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { AppShell } from "@/components/app-shell";
 import { HackathonListing } from "@/components/hackathon-listing";
 import { hackathonsQuery } from "@/lib/hackathons";
-import { Bookmark } from "lucide-react";
+import { savedHackathonIdsQuery } from "@/lib/bookmarks";
+import { useAuth } from "@/lib/auth-context";
+import { Bookmark, Lock } from "lucide-react";
 
 export const Route = createFileRoute("/saved")({
   loader: ({ context }) => context.queryClient.ensureQueryData(hackathonsQuery),
@@ -18,14 +21,8 @@ export const Route = createFileRoute("/saved")({
 
 function SavedPage() {
   const [search, setSearch] = useState("");
-  const [savedIds, setSavedIds] = useState<string[]>([]);
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("hackradar-saved");
-      if (raw) setSavedIds(JSON.parse(raw));
-    } catch {}
-  }, []);
+  const { user, openAuth, loading } = useAuth();
+  const { data: savedIds = [] } = useQuery(savedHackathonIdsQuery(user?.id));
 
   return (
     <AppShell search={search} onSearch={setSearch}>
@@ -40,10 +37,29 @@ function SavedPage() {
           </p>
         </div>
       </div>
-      {savedIds.length === 0 ? (
+
+      {!loading && !user ? (
+        <div className="neu-card p-12 text-center space-y-4 max-w-lg mx-auto">
+          <div className="w-14 h-14 mx-auto rounded-2xl neu-card-sm grid place-items-center text-primary">
+            <Lock className="w-6 h-6" />
+          </div>
+          <div>
+            <div className="text-lg font-bold">Log in to see saved hackathons</div>
+            <p className="text-sm text-muted-foreground mt-1">
+              Your bookmarks sync across every device you use.
+            </p>
+          </div>
+          <button
+            onClick={() => openAuth("signin")}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-primary text-primary-foreground text-sm font-semibold shadow-neu-sm hover:opacity-95"
+          >
+            Log in
+          </button>
+        </div>
+      ) : savedIds.length === 0 ? (
         <div className="neu-card p-12 text-center space-y-3">
           <p className="text-muted-foreground">
-            You haven't saved any hackathons yet. Bookmarks sync locally to this device.
+            You haven't saved any hackathons yet.
           </p>
           <Link
             to="/browse"

@@ -47,18 +47,21 @@ function HomePage() {
 
 function StatsRow() {
   const { data } = useSuspenseQuery(hackathonsQuery);
+  const hydrated = useHydrated();
   const total = data.length;
-  const closingWeek = data.filter((h) => {
-    const d = daysUntil(h.registration_deadline);
-    return d !== null && d >= 0 && d <= 7;
-  }).length;
+  const closingWeek = hydrated
+    ? data.filter((h) => {
+        const d = daysUntil(h.registration_deadline);
+        return d !== null && d >= 0 && d <= 7;
+      }).length
+    : 0;
   const online = data.filter((h) => h.mode === "Online").length;
   const offline = data.filter((h) => h.mode === "Offline" || h.mode === "Hybrid").length;
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
       <StatCard label="Hackathons tracked" value={total} icon={Radar} trend="+12%" accent="primary" />
-      <StatCard label="Closing this week" value={closingWeek} icon={CalendarClock} accent="warning" />
+      <StatCard label="Closing this week" value={hydrated ? closingWeek : "—"} icon={CalendarClock} accent="warning" />
       <StatCard label="Online events" value={online} icon={Globe2} accent="success" />
       <StatCard label="Offline / hybrid" value={offline} icon={MapPin} accent="muted" />
     </div>

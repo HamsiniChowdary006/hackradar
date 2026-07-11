@@ -73,7 +73,7 @@ export function UserMenu() {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()} className="text-destructive cursor-pointer">
+        <DropdownMenuItem onClick={handleSignOut} className="text-destructive cursor-pointer">
           <LogOut className="w-4 h-4 mr-2" /> Log out
         </DropdownMenuItem>
       </DropdownMenuContent>

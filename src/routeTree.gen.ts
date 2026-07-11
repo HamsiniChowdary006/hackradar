@@ -17,6 +17,7 @@ import { Route as HelpRouteImport } from './routes/help'
 import { Route as BrowseRouteImport } from './routes/browse'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogShowcaseHackathonExperienceRouteImport } from './routes/blog.showcase-hackathon-experience'
 
 const SubmitRoute = SubmitRouteImport.update({
   id: '/submit',
@@ -58,6 +59,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogShowcaseHackathonExperienceRoute =
+  BlogShowcaseHackathonExperienceRouteImport.update({
+    id: '/blog/showcase-hackathon-experience',
+    path: '/blog/showcase-hackathon-experience',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -68,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof SettingsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
+  '/blog/showcase-hackathon-experience': typeof BlogShowcaseHackathonExperienceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +86,7 @@ export interface FileRoutesByTo {
   '/settings': typeof SettingsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
+  '/blog/showcase-hackathon-experience': typeof BlogShowcaseHackathonExperienceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +98,7 @@ export interface FileRoutesById {
   '/settings': typeof SettingsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
+  '/blog/showcase-hackathon-experience': typeof BlogShowcaseHackathonExperienceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +111,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/sitemap.xml'
     | '/submit'
+    | '/blog/showcase-hackathon-experience'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +122,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/sitemap.xml'
     | '/submit'
+    | '/blog/showcase-hackathon-experience'
   id:
     | '__root__'
     | '/'
@@ -121,6 +133,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/sitemap.xml'
     | '/submit'
+    | '/blog/showcase-hackathon-experience'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -132,6 +145,7 @@ export interface RootRouteChildren {
   SettingsRoute: typeof SettingsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SubmitRoute: typeof SubmitRoute
+  BlogShowcaseHackathonExperienceRoute: typeof BlogShowcaseHackathonExperienceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -192,6 +206,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/showcase-hackathon-experience': {
+      id: '/blog/showcase-hackathon-experience'
+      path: '/blog/showcase-hackathon-experience'
+      fullPath: '/blog/showcase-hackathon-experience'
+      preLoaderRoute: typeof BlogShowcaseHackathonExperienceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -204,6 +225,7 @@ const rootRouteChildren: RootRouteChildren = {
   SettingsRoute: SettingsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SubmitRoute: SubmitRoute,
+  BlogShowcaseHackathonExperienceRoute: BlogShowcaseHackathonExperienceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

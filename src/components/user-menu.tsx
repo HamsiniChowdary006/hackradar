@@ -11,16 +11,16 @@ import {
 import { useAuth } from "@/lib/auth-context";
 
 export function UserMenu() {
-  const { user, profile, openAuth, signOut } = useAuth();
+  const { user, profile, signOut } = useAuth();
 
   if (!user) {
     return (
-      <button
-        onClick={() => openAuth("signin")}
+      <Link
+        to="/login"
         className="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-primary text-primary-foreground text-sm font-semibold shadow-neu-sm hover:opacity-95"
       >
         Log in
-      </button>
+      </Link>
     );
   }
 

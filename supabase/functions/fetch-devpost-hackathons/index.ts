@@ -95,7 +95,7 @@ function mapItem(item: ApifyItem): HackathonInsert | null {
 
 async function runApifyActor(token: string): Promise<ApifyItem[]> {
   const url = `https://api.apify.com/v2/acts/${APIFY_ACTOR_ID}/run-sync-get-dataset-items?token=${token}`;
-  console.log(`Calling Apify API URL: ${url}`);
+  console.log(`Calling Apify API URL: https://api.apify.com/v2/acts/${APIFY_ACTOR_ID}/run-sync-get-dataset-items?token=***`);
 
   const runRes = await fetch(url, {
     method: "POST",

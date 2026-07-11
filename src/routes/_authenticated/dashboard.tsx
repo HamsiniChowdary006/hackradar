@@ -4,8 +4,8 @@ import { Bookmark, Radar, Settings as SettingsIcon, Sparkles } from "lucide-reac
 import { AppShell } from "@/components/app-shell";
 import { useState } from "react";
 import { useAuth } from "@/lib/auth-context";
-import { savedHackathonsQuery } from "@/lib/bookmarks";
-import { hackathonsQuery } from "@/lib/hackathons";
+import { savedHackathonIdsQuery } from "@/lib/bookmarks";
+import { hackathonsQuery, type Hackathon } from "@/lib/hackathons";
 import { StatCard } from "@/components/stat-card";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({

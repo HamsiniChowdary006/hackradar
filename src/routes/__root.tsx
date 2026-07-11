@@ -82,6 +82,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "HackRadar" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { title: "HackRadar — Every hackathon, one feed" },
+      { property: "og:title", content: "HackRadar — Every hackathon, one feed" },
+      { name: "twitter:title", content: "HackRadar — Every hackathon, one feed" },
+      { name: "description", content: "Browse hackathons and tech events from Devpost, Unstop, HackerEarth, Devfolio, MLH, Eventbrite and Hack2Skill — filtered by skill level, mode, and location." },
+      { property: "og:description", content: "Browse hackathons and tech events from Devpost, Unstop, HackerEarth, Devfolio, MLH, Eventbrite and Hack2Skill — filtered by skill level, mode, and location." },
+      { name: "twitter:description", content: "Browse hackathons and tech events from Devpost, Unstop, HackerEarth, Devfolio, MLH, Eventbrite and Hack2Skill — filtered by skill level, mode, and location." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/52e8ba7b-04d8-4abb-b9cc-22fa6f5bf471/id-preview-b63c853a--7c8a96cf-1044-4651-8305-8e357e40f39c.lovable.app-1783760033248.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/52e8ba7b-04d8-4abb-b9cc-22fa6f5bf471/id-preview-b63c853a--7c8a96cf-1044-4651-8305-8e357e40f39c.lovable.app-1783760033248.png" },
     ],
     scripts: [
       {

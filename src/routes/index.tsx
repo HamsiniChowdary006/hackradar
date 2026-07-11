@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "HackRadar — Every hackathon, one feed" },
       {
         property: "og:description",
-        content: "One browsable, filterable feed of hackathons aggregated from every major platform.",
+        content: "Browse hackathons and tech events from Devpost, Unstop, HackerEarth, Devfolio, MLH, Eventbrite and Hack2Skill — filtered by skill level, mode, and location.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://hackradar.lovable.app/" },

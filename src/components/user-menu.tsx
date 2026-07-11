@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import { Bookmark, LogOut, Settings, User as UserIcon } from "lucide-react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { Bookmark, LayoutDashboard, LogOut, Settings, User as UserIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,16 +11,21 @@ import {
 import { useAuth } from "@/lib/auth-context";
 
 export function UserMenu() {
-  const { user, profile, openAuth, signOut } = useAuth();
+  const { user, profile, signOut } = useAuth();
+  const navigate = useNavigate();
+  const handleSignOut = async () => {
+    await signOut();
+    navigate({ to: "/", replace: true });
+  };
 
   if (!user) {
     return (
-      <button
-        onClick={() => openAuth("signin")}
+      <Link
+        to="/login"
         className="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-primary text-primary-foreground text-sm font-semibold shadow-neu-sm hover:opacity-95"
       >
         Log in
-      </button>
+      </Link>
     );
   }
 
@@ -48,6 +53,11 @@ export function UserMenu() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
+          <Link to="/dashboard" className="cursor-pointer">
+            <LayoutDashboard className="w-4 h-4 mr-2" /> Dashboard
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link to="/settings" className="cursor-pointer">
             <UserIcon className="w-4 h-4 mr-2" /> Profile
           </Link>
@@ -63,7 +73,7 @@ export function UserMenu() {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()} className="text-destructive cursor-pointer">
+        <DropdownMenuItem onClick={handleSignOut} className="text-destructive cursor-pointer">
           <LogOut className="w-4 h-4 mr-2" /> Log out
         </DropdownMenuItem>
       </DropdownMenuContent>

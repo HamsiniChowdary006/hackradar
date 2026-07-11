@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SubmitRouteImport } from './routes/submit'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SavedRouteImport } from './routes/saved'
 import { Route as LoginRouteImport } from './routes/login'
@@ -28,6 +29,11 @@ const SubmitRoute = SubmitRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsRoute = SettingsRouteImport.update({
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/saved': typeof SavedRoute
   '/settings': typeof SettingsRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
   '/blog/showcase-hackathon-experience': typeof BlogShowcaseHackathonExperienceRoute
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/saved': typeof SavedRoute
   '/settings': typeof SettingsRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
   '/blog/showcase-hackathon-experience': typeof BlogShowcaseHackathonExperienceRoute
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/saved': typeof SavedRoute
   '/settings': typeof SettingsRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
   '/blog/showcase-hackathon-experience': typeof BlogShowcaseHackathonExperienceRoute
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/saved'
     | '/settings'
+    | '/signup'
     | '/sitemap.xml'
     | '/submit'
     | '/blog/showcase-hackathon-experience'
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/saved'
     | '/settings'
+    | '/signup'
     | '/sitemap.xml'
     | '/submit'
     | '/blog/showcase-hackathon-experience'
@@ -143,6 +154,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/saved'
     | '/settings'
+    | '/signup'
     | '/sitemap.xml'
     | '/submit'
     | '/blog/showcase-hackathon-experience'
@@ -156,6 +168,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   SavedRoute: typeof SavedRoute
   SettingsRoute: typeof SettingsRoute
+  SignupRoute: typeof SignupRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SubmitRoute: typeof SubmitRoute
   BlogShowcaseHackathonExperienceRoute: typeof BlogShowcaseHackathonExperienceRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings': {
@@ -244,6 +264,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   SavedRoute: SavedRoute,
   SettingsRoute: SettingsRoute,
+  SignupRoute: SignupRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SubmitRoute: SubmitRoute,
   BlogShowcaseHackathonExperienceRoute: BlogShowcaseHackathonExperienceRoute,

@@ -20,8 +20,10 @@ import { Route as HelpRouteImport } from './routes/help'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as BrowseRouteImport } from './routes/browse'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogShowcaseHackathonExperienceRouteImport } from './routes/blog.showcase-hackathon-experience'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 
 const SubmitRoute = SubmitRouteImport.update({
   id: '/submit',
@@ -78,6 +80,10 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -89,6 +95,11 @@ const BlogShowcaseHackathonExperienceRoute =
     path: '/blog/showcase-hackathon-experience',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/showcase-hackathon-experience': typeof BlogShowcaseHackathonExperienceRoute
 }
 export interface FileRoutesByTo {
@@ -118,11 +130,13 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/showcase-hackathon-experience': typeof BlogShowcaseHackathonExperienceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/browse': typeof BrowseRoute
   '/forgot-password': typeof ForgotPasswordRoute
@@ -134,6 +148,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submit': typeof SubmitRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/showcase-hackathon-experience': typeof BlogShowcaseHackathonExperienceRoute
 }
 export interface FileRouteTypes {
@@ -151,6 +166,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sitemap.xml'
     | '/submit'
+    | '/dashboard'
     | '/blog/showcase-hackathon-experience'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -166,10 +182,12 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sitemap.xml'
     | '/submit'
+    | '/dashboard'
     | '/blog/showcase-hackathon-experience'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
     | '/browse'
     | '/forgot-password'
@@ -181,11 +199,13 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sitemap.xml'
     | '/submit'
+    | '/_authenticated/dashboard'
     | '/blog/showcase-hackathon-experience'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   BrowseRoute: typeof BrowseRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
@@ -279,6 +299,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -293,11 +320,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogShowcaseHackathonExperienceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   BrowseRoute: BrowseRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,

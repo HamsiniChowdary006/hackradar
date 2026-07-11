@@ -155,6 +155,7 @@ export type Database = {
           source_platform: string | null
           source_url: string
           status: string
+          submitted_by: string | null
           submitter_email: string | null
           tags: string[] | null
           title: string
@@ -174,6 +175,7 @@ export type Database = {
           source_platform?: string | null
           source_url: string
           status?: string
+          submitted_by?: string | null
           submitter_email?: string | null
           tags?: string[] | null
           title: string
@@ -193,6 +195,7 @@ export type Database = {
           source_platform?: string | null
           source_url?: string
           status?: string
+          submitted_by?: string | null
           submitter_email?: string | null
           tags?: string[] | null
           title?: string

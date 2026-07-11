@@ -1,0 +1,22 @@
+# HackRadar
+
+> HackRadar aggregates hackathons and tech events from Devpost, Unstop, HackerEarth, Devfolio, MLH, Eventbrite, and Hack2Skill into one browsable, filterable feed.
+
+HackRadar helps developers, students, and hackathon enthusiasts discover upcoming hackathons across platforms, filter by skill level, mode (online/offline/hybrid) and location, save events, and get deadline reminders.
+
+## Pages
+
+- [Home](/): Featured hackathons, stats, and quick filters.
+- [Browse](/browse): Full filterable list of hackathons across all sources.
+- [Saved](/saved): Bookmarked hackathons for signed-in users.
+- [Submit](/submit): Submit a hackathon for review and inclusion.
+- [About](/about): What HackRadar is and how it works.
+- [Help](/help): Frequently asked questions.
+
+## Blog
+
+- [Showcase your hackathon experience](/blog/showcase-hackathon-experience): Tips for turning hackathon projects into portfolio wins.
+
+## Optional
+
+- [Settings](/settings): Personal notification and profile preferences (requires sign-in).

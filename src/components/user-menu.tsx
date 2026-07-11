@@ -48,6 +48,11 @@ export function UserMenu() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
+          <Link to="/dashboard" className="cursor-pointer">
+            <LayoutDashboard className="w-4 h-4 mr-2" /> Dashboard
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link to="/settings" className="cursor-pointer">
             <UserIcon className="w-4 h-4 mr-2" /> Profile
           </Link>

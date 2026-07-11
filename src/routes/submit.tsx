@@ -61,6 +61,7 @@ function SubmitPage() {
       country: form.country || null,
       description: form.description || null,
       submitter_email: form.submitter_email || null,
+      submitted_by: user?.id ?? null,
     };
     const { error } = await supabase.from("pending_submissions" as never).insert(payload as never);
     setSubmitting(false);

@@ -22,8 +22,8 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 function DashboardPage() {
   const [search, setSearch] = useState("");
   const { user, profile } = useAuth();
-  const { data: saved = [] } = useQuery(savedHackathonsQuery(user?.id));
-  const { data: all = [] } = useQuery(hackathonsQuery());
+  const { data: saved = [] } = useQuery(savedHackathonIdsQuery(user?.id));
+  const { data: all = [] } = useQuery<Hackathon[]>(hackathonsQuery);
 
   const upcoming = all
     .filter((h) => h.registration_deadline && new Date(h.registration_deadline) >= new Date())

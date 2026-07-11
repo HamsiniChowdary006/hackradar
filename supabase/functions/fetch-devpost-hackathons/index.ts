@@ -6,7 +6,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 
 // Replace with the actual Apify actor id for the Devpost scraper.
 // Format: "username~actor-name" (URL-safe) or actor id.
-const APIFY_ACTOR_ID = Deno.env.get("APIFY_DEVPOST_ACTOR_ID") ?? "REPLACE_WITH_APIFY_ACTOR_ID";
+const APIFY_ACTOR_ID = Deno.env.get("APIFY_DEVPOST_ACTOR_ID") ?? "automation-lab~devpost-scraper";
 const SOURCE = "Devpost";
 
 const corsHeaders = {

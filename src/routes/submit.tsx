@@ -123,60 +123,78 @@ function SubmitPage() {
 
 
       <form onSubmit={onSubmit} className="neu-card p-6 md:p-8 space-y-5 max-w-3xl">
-        <Field label="Hackathon title *">
-          <Input value={form.title} onChange={(v) => update("title", v)} placeholder="AI Frontier Hack 2026" />
+        <Field label="Hackathon title *" htmlFor="submit-title">
+          <Input id="submit-title" value={form.title} onChange={(v) => update("title", v)} placeholder="AI Frontier Hack 2026" />
         </Field>
-        <Field label="Source URL *">
-          <Input value={form.source_url} onChange={(v) => update("source_url", v)} placeholder="https://..." />
+        <Field label="Source URL *" htmlFor="submit-source-url">
+          <Input id="submit-source-url" value={form.source_url} onChange={(v) => update("source_url", v)} placeholder="https://..." />
         </Field>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Field label="Source platform">
+          <Field label="Source platform" htmlFor="submit-platform">
             <Select
+              id="submit-platform"
               value={form.source_platform}
               onChange={(v) => update("source_platform", v)}
               options={[...SOURCE_PLATFORMS, "Other"]}
             />
           </Field>
-          <Field label="Skill level">
+          <Field label="Skill level" htmlFor="submit-skill">
             <Select
+              id="submit-skill"
               value={form.skill_level}
               onChange={(v) => update("skill_level", v)}
               options={["Beginner", "Medium", "Advanced"]}
             />
           </Field>
-          <Field label="Mode">
+          <Field label="Mode" htmlFor="submit-mode">
             <Select
+              id="submit-mode"
               value={form.mode}
               onChange={(v) => update("mode", v)}
               options={["Online", "Offline", "Hybrid"]}
             />
           </Field>
-          <Field label="Fee">
-            <Input value={form.fee} onChange={(v) => update("fee", v)} placeholder="Free" />
+          <Field label="Fee" htmlFor="submit-fee">
+            <Input id="submit-fee" value={form.fee} onChange={(v) => update("fee", v)} placeholder="Free" />
           </Field>
-          <Field label="City">
-            <Input value={form.city} onChange={(v) => update("city", v)} placeholder="Bengaluru" />
+          <Field label="City" htmlFor="submit-city">
+            <Input id="submit-city" value={form.city} onChange={(v) => update("city", v)} placeholder="Bengaluru" />
           </Field>
-          <Field label="Country">
-            <Input value={form.country} onChange={(v) => update("country", v)} placeholder="India" />
+          <Field label="Country" htmlFor="submit-country">
+            <Input id="submit-country" value={form.country} onChange={(v) => update("country", v)} placeholder="India" />
           </Field>
-          <Field label="Registration deadline">
-            <Input type="date" value={form.registration_deadline} onChange={(v) => update("registration_deadline", v)} />
+          <Field label="Registration deadline" htmlFor="submit-deadline">
+            <Input id="submit-deadline" type="date" value={form.registration_deadline} onChange={(v) => update("registration_deadline", v)} />
           </Field>
-          <Field label="Event start">
-            <Input type="date" value={form.event_start} onChange={(v) => update("event_start", v)} />
+          <Field label="Event start" htmlFor="submit-start">
+            <Input id="submit-start" type="date" value={form.event_start} onChange={(v) => update("event_start", v)} />
           </Field>
-          <Field label="Event end">
-            <Input type="date" value={form.event_end} onChange={(v) => update("event_end", v)} />
+          <Field label="Event end" htmlFor="submit-end">
+            <Input id="submit-end" type="date" value={form.event_end} onChange={(v) => update("event_end", v)} />
           </Field>
-          <Field label="Your email (optional)">
+          <Field label="Your email (optional)" htmlFor="submit-email">
             <Input
+              id="submit-email"
               type="email"
               value={form.submitter_email}
               onChange={(v) => update("submitter_email", v)}
               placeholder="you@domain.com"
             />
           </Field>
+        </div>
+        <Field label="Tags (comma-separated)" htmlFor="submit-tags">
+          <Input id="submit-tags" value={form.tags} onChange={(v) => update("tags", v)} placeholder="AI, Web3, Climate" />
+        </Field>
+        <Field label="Description" htmlFor="submit-description">
+          <textarea
+            id="submit-description"
+            value={form.description}
+            onChange={(e) => update("description", e.target.value)}
+            rows={4}
+            className="w-full bg-transparent outline-none text-sm placeholder:text-muted-foreground neu-inset px-4 py-3 rounded-2xl"
+            placeholder="What's this hackathon about?"
+          />
+        </Field>
         </div>
         <Field label="Tags (comma-separated)">
           <Input value={form.tags} onChange={(v) => update("tags", v)} placeholder="AI, Web3, Climate" />
@@ -205,9 +223,9 @@ function SubmitPage() {
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children, htmlFor }: { label: string; children: React.ReactNode; htmlFor?: string }) {
   return (
-    <label className="block">
+    <label htmlFor={htmlFor} className="block">
       <span className="text-xs uppercase tracking-wider font-semibold text-muted-foreground mb-1.5 block">
         {label}
       </span>
@@ -217,11 +235,13 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 }
 
 function Input({
+  id,
   value,
   onChange,
   placeholder,
   type = "text",
 }: {
+  id?: string;
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
@@ -230,6 +250,7 @@ function Input({
   return (
     <div className="neu-inset px-4 py-2.5">
       <input
+        id={id}
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -241,10 +262,12 @@ function Input({
 }
 
 function Select({
+  id,
   value,
   onChange,
   options,
 }: {
+  id?: string;
   value: string;
   onChange: (v: string) => void;
   options: readonly string[];
@@ -252,6 +275,7 @@ function Select({
   return (
     <div className="neu-inset px-3 py-2">
       <select
+        id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="w-full bg-transparent outline-none text-sm"

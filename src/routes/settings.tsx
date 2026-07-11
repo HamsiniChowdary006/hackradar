@@ -164,11 +164,12 @@ function SettingsPage() {
             </div>
           </div>
           <div className="grid gap-3">
-            <label className="text-xs font-semibold text-muted-foreground">Email</label>
-            <div className="neu-inset px-4 py-3 text-sm text-muted-foreground">{user?.email}</div>
-            <label className="text-xs font-semibold text-muted-foreground mt-2">Display name</label>
+            <label htmlFor="settings-email" className="text-xs font-semibold text-muted-foreground">Email</label>
+            <div id="settings-email" className="neu-inset px-4 py-3 text-sm text-muted-foreground">{user?.email}</div>
+            <label htmlFor="settings-display-name" className="text-xs font-semibold text-muted-foreground mt-2">Display name</label>
             <div className="neu-inset px-4 py-3">
               <input
+                id="settings-display-name"
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
                 placeholder="Your name"
@@ -243,11 +244,12 @@ function SettingsPage() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            <label htmlFor="settings-location" className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Preferred location
             </label>
             <div className="neu-inset px-4 py-3">
               <input
+                id="settings-location"
                 value={preferredLocation}
                 onChange={(e) => setPreferredLocation(e.target.value)}
                 placeholder="e.g. Bengaluru, San Francisco"

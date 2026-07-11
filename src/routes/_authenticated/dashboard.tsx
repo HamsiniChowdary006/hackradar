@@ -23,7 +23,7 @@ function DashboardPage() {
   const [search, setSearch] = useState("");
   const { user, profile } = useAuth();
   const { data: saved = [] } = useQuery(savedHackathonIdsQuery(user?.id));
-  const { data: all = [] } = useQuery<Hackathon[]>(hackathonsQuery);
+  const { data: all = [] as Hackathon[] } = useQuery(hackathonsQuery);
 
   const upcoming = all
     .filter((h) => h.registration_deadline && new Date(h.registration_deadline) >= new Date())

@@ -94,18 +94,26 @@ function mapItem(item: ApifyItem): HackathonInsert | null {
 }
 
 async function runApifyActor(token: string): Promise<ApifyItem[]> {
-  const runRes = await fetch(
-    `https://api.apify.com/v2/acts/${APIFY_ACTOR_ID}/run-sync-get-dataset-items?token=${token}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({}),
-    },
-  );
+  const url = `https://api.apify.com/v2/acts/${APIFY_ACTOR_ID}/run-sync-get-dataset-items?token=${token}`;
+  console.log(`Calling Apify API URL: ${url}`);
+
+  const runRes = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({}),
+  });
+
   if (!runRes.ok) {
     const text = await runRes.text();
+    if (runRes.status === 404) {
+      throw new Error(
+        `Apify actor '${APIFY_ACTOR_ID}' not found (404). ` +
+          `Verify the actor ID uses the 'username~actor-name' format and is published.`,
+      );
+    }
     throw new Error(`Apify run failed: ${runRes.status} ${text}`);
   }
+
   const data = await runRes.json();
   return Array.isArray(data) ? (data as ApifyItem[]) : [];
 }

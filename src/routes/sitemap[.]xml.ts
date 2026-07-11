@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "";
+const BASE_URL = "https://hackradar.lovable.app";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -12,8 +12,10 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/browse", priority: "0.9", changefreq: "daily" as const },
           { path: "/saved", priority: "0.4", changefreq: "monthly" as const },
           { path: "/submit", priority: "0.6", changefreq: "monthly" as const },
+          { path: "/settings", priority: "0.3", changefreq: "monthly" as const },
           { path: "/about", priority: "0.5", changefreq: "monthly" as const },
           { path: "/help", priority: "0.5", changefreq: "monthly" as const },
+          { path: "/blog/showcase-hackathon-experience", priority: "0.6", changefreq: "monthly" as const },
         ];
         const xml = [
           `<?xml version="1.0" encoding="UTF-8"?>`,

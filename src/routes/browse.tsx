@@ -9,8 +9,20 @@ export const Route = createFileRoute("/browse")({
   head: () => ({
     meta: [
       { title: "Browse Hackathons — HackRadar" },
-      { name: "description", content: "Filter hackathons by skill level, mode, location and platform." },
+      {
+        name: "description",
+        content:
+          "Filter hackathons by skill level, mode, location and source platform across Devpost, Unstop, HackerEarth, Devfolio, MLH, Eventbrite and Hack2Skill.",
+      },
+      { property: "og:title", content: "Browse Hackathons — HackRadar" },
+      {
+        property: "og:description",
+        content: "Every hackathon we track, filterable by skill, mode, location and platform.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://hackradar.lovable.app/browse" },
     ],
+    links: [{ rel: "canonical", href: "https://hackradar.lovable.app/browse" }],
   }),
   component: BrowsePage,
 });

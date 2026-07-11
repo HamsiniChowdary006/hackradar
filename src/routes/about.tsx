@@ -7,12 +7,22 @@ import { Radar } from "lucide-react";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About HackRadar" },
+      { title: "About HackRadar — Tracking hackathons across major platforms" },
       {
         name: "description",
-        content: "HackRadar tracks hackathons across major platforms so you never miss an opportunity.",
+        content:
+          "HackRadar is a single feed for hackathons and tech events pulled from Devpost, Unstop, HackerEarth, Devfolio, MLH, Eventbrite and Hack2Skill — so developers never miss an opportunity.",
       },
+      { property: "og:title", content: "About HackRadar — Tracking hackathons across major platforms" },
+      {
+        property: "og:description",
+        content:
+          "How HackRadar aggregates hackathons from every major platform into one clean, filterable feed.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://hackradar.lovable.app/about" },
     ],
+    links: [{ rel: "canonical", href: "https://hackradar.lovable.app/about" }],
   }),
   component: AboutPage,
 });
@@ -30,7 +40,9 @@ function AboutPage() {
             <div className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-1">
               About
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">HackRadar</h1>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+              About HackRadar — Tracking hackathons across major platforms
+            </h1>
           </div>
         </div>
 

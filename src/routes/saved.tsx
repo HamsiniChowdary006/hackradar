@@ -13,8 +13,20 @@ export const Route = createFileRoute("/saved")({
   head: () => ({
     meta: [
       { title: "Saved Hackathons — HackRadar" },
-      { name: "description", content: "Your bookmarked hackathons." },
+      {
+        name: "description",
+        content:
+          "Your bookmarked hackathons in one place. Sign in once and your saved events sync across every device you use HackRadar on.",
+      },
+      { property: "og:title", content: "Saved Hackathons — HackRadar" },
+      {
+        property: "og:description",
+        content: "Bookmarked hackathons that sync across every device.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://hackradar.lovable.app/saved" },
     ],
+    links: [{ rel: "canonical", href: "https://hackradar.lovable.app/saved" }],
   }),
   component: SavedPage,
 });

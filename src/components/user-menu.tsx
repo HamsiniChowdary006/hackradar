@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Bookmark, LogOut, Settings, User as UserIcon } from "lucide-react";
+import { Bookmark, LayoutDashboard, LogOut, Settings, User as UserIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,

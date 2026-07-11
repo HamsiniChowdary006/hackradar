@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Bookmark, LayoutDashboard, LogOut, Settings, User as UserIcon } from "lucide-react";
 import {
   DropdownMenu,

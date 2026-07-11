@@ -12,6 +12,11 @@ import { useAuth } from "@/lib/auth-context";
 
 export function UserMenu() {
   const { user, profile, signOut } = useAuth();
+  const navigate = useNavigate();
+  const handleSignOut = async () => {
+    await signOut();
+    navigate({ to: "/", replace: true });
+  };
 
   if (!user) {
     return (

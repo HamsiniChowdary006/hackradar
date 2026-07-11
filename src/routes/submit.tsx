@@ -11,8 +11,20 @@ export const Route = createFileRoute("/submit")({
   head: () => ({
     meta: [
       { title: "Submit a Hackathon — HackRadar" },
-      { name: "description", content: "Suggest a hackathon for HackRadar to track." },
+      {
+        name: "description",
+        content:
+          "Suggest a hackathon we're missing. Every submission is manually reviewed by the HackRadar team before it goes live in the public feed.",
+      },
+      { property: "og:title", content: "Submit a Hackathon — HackRadar" },
+      {
+        property: "og:description",
+        content: "Send us hackathons and tech events to add to the HackRadar feed.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://hackradar.lovable.app/submit" },
     ],
+    links: [{ rel: "canonical", href: "https://hackradar.lovable.app/submit" }],
   }),
   component: SubmitPage,
 });

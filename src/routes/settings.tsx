@@ -37,8 +37,20 @@ export const Route = createFileRoute("/settings")({
   head: () => ({
     meta: [
       { title: "Settings — HackRadar" },
-      { name: "description", content: "Manage your profile and notification preferences." },
+      {
+        name: "description",
+        content:
+          "Personalize your HackRadar feed: set your display name, pick preferred skill levels, event modes and locations, and control deadline reminder notifications.",
+      },
+      { property: "og:title", content: "Settings — HackRadar" },
+      {
+        property: "og:description",
+        content: "Personalize your hackathon feed and notification preferences.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://hackradar.lovable.app/settings" },
     ],
+    links: [{ rel: "canonical", href: "https://hackradar.lovable.app/settings" }],
   }),
   component: SettingsPage,
 });

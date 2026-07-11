@@ -10,6 +10,37 @@ import { useHydrated } from "@/lib/use-hydrated";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(hackathonsQuery),
+  head: () => ({
+    meta: [
+      { title: "HackRadar — Every hackathon, one feed" },
+      {
+        name: "description",
+        content:
+          "Browse hackathons and tech events from Devpost, Unstop, HackerEarth, Devfolio, MLH, Eventbrite and Hack2Skill — filtered by skill level, mode, and location.",
+      },
+      { property: "og:title", content: "HackRadar — Every hackathon, one feed" },
+      {
+        property: "og:description",
+        content: "One browsable, filterable feed of hackathons aggregated from every major platform.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://hackradar.lovable.app/" },
+    ],
+    links: [{ rel: "canonical", href: "https://hackradar.lovable.app/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "HackRadar — Every hackathon, one feed",
+          description:
+            "Aggregated hackathons from Devpost, Unstop, HackerEarth, Devfolio, MLH, Eventbrite and Hack2Skill.",
+          url: "https://hackradar.lovable.app/",
+        }),
+      },
+    ],
+  }),
   component: HomePage,
 });
 

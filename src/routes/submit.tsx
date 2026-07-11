@@ -195,19 +195,6 @@ function SubmitPage() {
             placeholder="What's this hackathon about?"
           />
         </Field>
-        </div>
-        <Field label="Tags (comma-separated)">
-          <Input value={form.tags} onChange={(v) => update("tags", v)} placeholder="AI, Web3, Climate" />
-        </Field>
-        <Field label="Description">
-          <textarea
-            value={form.description}
-            onChange={(e) => update("description", e.target.value)}
-            rows={4}
-            className="w-full bg-transparent outline-none text-sm placeholder:text-muted-foreground neu-inset px-4 py-3 rounded-2xl"
-            placeholder="What's this hackathon about?"
-          />
-        </Field>
         <div className="pt-2">
           <button
             type="submit"

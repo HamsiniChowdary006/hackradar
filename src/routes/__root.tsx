@@ -79,20 +79,36 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "HackRadar — Every hackathon, one feed" },
-      {
-        name: "description",
-        content:
-          "Browse hackathons and tech events from Devpost, Unstop, HackerEarth, Devfolio, MLH, Eventbrite and Hack2Skill — filtered by skill level, mode, and location.",
-      },
-      { property: "og:title", content: "HackRadar — Every hackathon, one feed" },
-      {
-        property: "og:description",
-        content:
-          "One browsable, filterable feed of hackathons aggregated from every major platform.",
-      },
+      { property: "og:site_name", content: "HackRadar" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              name: "HackRadar",
+              url: "https://hackradar.lovable.app",
+              description:
+                "Aggregator of hackathons and tech events from every major platform.",
+            },
+            {
+              "@type": "WebSite",
+              name: "HackRadar",
+              url: "https://hackradar.lovable.app",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://hackradar.lovable.app/browse?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            },
+          ],
+        }),
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

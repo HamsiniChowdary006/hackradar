@@ -258,6 +258,24 @@ export type Database = {
           },
         ]
       }
+      scrape_log: {
+        Row: {
+          last_run_at: string | null
+          last_run_status: string | null
+          source_platform: string
+        }
+        Insert: {
+          last_run_at?: string | null
+          last_run_status?: string | null
+          source_platform: string
+        }
+        Update: {
+          last_run_at?: string | null
+          last_run_status?: string | null
+          source_platform?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string

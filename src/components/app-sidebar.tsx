@@ -1,9 +1,10 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Radar, Home, Compass, Bookmark, Plus, Info, HelpCircle, MessageSquare } from "lucide-react";
+import { Radar, Home, Compass, Bookmark, Plus, Info, HelpCircle, MessageSquare, ListChecks } from "lucide-react";
 
 const nav = [
   { to: "/", label: "Home", icon: Home },
   { to: "/browse", label: "Browse", icon: Compass },
+  { to: "/hackathons", label: "Directory", icon: ListChecks },
   { to: "/saved", label: "Saved", icon: Bookmark },
   { to: "/about", label: "About", icon: Info },
   { to: "/help", label: "Help", icon: HelpCircle },

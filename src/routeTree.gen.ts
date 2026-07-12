@@ -17,6 +17,7 @@ import { Route as SavedRouteImport } from './routes/saved'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as HelpRouteImport } from './routes/help'
+import { Route as HackathonsRouteImport } from './routes/hackathons'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as FeedbackRouteImport } from './routes/feedback'
 import { Route as BrowseRouteImport } from './routes/browse'
@@ -66,6 +67,11 @@ const HelpRoute = HelpRouteImport.update({
   path: '/help',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HackathonsRoute = HackathonsRouteImport.update({
+  id: '/hackathons',
+  path: '/hackathons',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
@@ -113,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/browse': typeof BrowseRoute
   '/feedback': typeof FeedbackRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/hackathons': typeof HackathonsRoute
   '/help': typeof HelpRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -130,6 +137,7 @@ export interface FileRoutesByTo {
   '/browse': typeof BrowseRoute
   '/feedback': typeof FeedbackRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/hackathons': typeof HackathonsRoute
   '/help': typeof HelpRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/browse': typeof BrowseRoute
   '/feedback': typeof FeedbackRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/hackathons': typeof HackathonsRoute
   '/help': typeof HelpRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/browse'
     | '/feedback'
     | '/forgot-password'
+    | '/hackathons'
     | '/help'
     | '/login'
     | '/reset-password'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
     | '/browse'
     | '/feedback'
     | '/forgot-password'
+    | '/hackathons'
     | '/help'
     | '/login'
     | '/reset-password'
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '/browse'
     | '/feedback'
     | '/forgot-password'
+    | '/hackathons'
     | '/help'
     | '/login'
     | '/reset-password'
@@ -222,6 +234,7 @@ export interface RootRouteChildren {
   BrowseRoute: typeof BrowseRoute
   FeedbackRoute: typeof FeedbackRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
+  HackathonsRoute: typeof HackathonsRoute
   HelpRoute: typeof HelpRoute
   LoginRoute: typeof LoginRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -289,6 +302,13 @@ declare module '@tanstack/react-router' {
       path: '/help'
       fullPath: '/help'
       preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hackathons': {
+      id: '/hackathons'
+      path: '/hackathons'
+      fullPath: '/hackathons'
+      preLoaderRoute: typeof HackathonsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/forgot-password': {
@@ -368,6 +388,7 @@ const rootRouteChildren: RootRouteChildren = {
   BrowseRoute: BrowseRoute,
   FeedbackRoute: FeedbackRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
+  HackathonsRoute: HackathonsRoute,
   HelpRoute: HelpRoute,
   LoginRoute: LoginRoute,
   ResetPasswordRoute: ResetPasswordRoute,

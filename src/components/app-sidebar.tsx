@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Radar, Home, Compass, Bookmark, Plus, Info, HelpCircle } from "lucide-react";
+import { Radar, Home, Compass, Bookmark, Plus, Info, HelpCircle, MessageSquare } from "lucide-react";
 
 const nav = [
   { to: "/", label: "Home", icon: Home },
@@ -7,6 +7,7 @@ const nav = [
   { to: "/saved", label: "Saved", icon: Bookmark },
   { to: "/about", label: "About", icon: Info },
   { to: "/help", label: "Help", icon: HelpCircle },
+  { to: "/feedback", label: "Feedback", icon: MessageSquare },
 ] as const;
 
 export function AppSidebar() {

@@ -1,8 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { AppShell } from "@/components/app-shell";
 import { SOURCE_PLATFORMS } from "@/lib/hackathons";
-import { Radar } from "lucide-react";
+import { Radar, MessageSquare } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({

@@ -73,6 +73,26 @@ function AboutPage() {
             ))}
           </div>
         </div>
+
+        <div className="neu-card p-6 md:p-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl grid place-items-center neu-card-sm text-primary shrink-0">
+              <MessageSquare className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="font-bold">Got feedback?</h2>
+              <p className="text-sm text-muted-foreground">
+                Bug, feature idea, or just a note — I read every message.
+              </p>
+            </div>
+          </div>
+          <Link
+            to="/feedback"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-primary text-primary-foreground text-sm font-semibold shadow-neu-sm hover:opacity-95 shrink-0"
+          >
+            Send feedback
+          </Link>
+        </div>
       </div>
     </AppShell>
   );

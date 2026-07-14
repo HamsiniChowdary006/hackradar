@@ -5,7 +5,7 @@ import { ExternalLink, MapPin, Calendar, Tag, Layers, Globe2, Clock } from "luci
 import { AppShell } from "@/components/app-shell";
 import { hackathonsQuery, daysUntil, type Hackathon } from "@/lib/hackathons";
 
-export const Route = createFileRoute("/hackathons")({
+export const Route = createFileRoute("/_authenticated/hackathons")({
   loader: ({ context }) => context.queryClient.ensureQueryData(hackathonsQuery),
   head: () => ({
     meta: [

@@ -9,29 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SubmitRouteImport } from './routes/submit'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SignupRouteImport } from './routes/signup'
-import { Route as SettingsRouteImport } from './routes/settings'
-import { Route as SavedRouteImport } from './routes/saved'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as HelpRouteImport } from './routes/help'
-import { Route as HackathonsRouteImport } from './routes/hackathons'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as FeedbackRouteImport } from './routes/feedback'
-import { Route as BrowseRouteImport } from './routes/browse'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogShowcaseHackathonExperienceRouteImport } from './routes/blog.showcase-hackathon-experience'
+import { Route as AuthenticatedSubmitRouteImport } from './routes/_authenticated/submit'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedSavedRouteImport } from './routes/_authenticated/saved'
+import { Route as AuthenticatedHackathonsRouteImport } from './routes/_authenticated/hackathons'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedBrowseRouteImport } from './routes/_authenticated/browse'
 
-const SubmitRoute = SubmitRouteImport.update({
-  id: '/submit',
-  path: '/submit',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -40,16 +35,6 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SettingsRoute = SettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SavedRoute = SavedRouteImport.update({
-  id: '/saved',
-  path: '/saved',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -67,11 +52,6 @@ const HelpRoute = HelpRouteImport.update({
   path: '/help',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HackathonsRoute = HackathonsRouteImport.update({
-  id: '/hackathons',
-  path: '/hackathons',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
@@ -80,11 +60,6 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
 const FeedbackRoute = FeedbackRouteImport.update({
   id: '/feedback',
   path: '/feedback',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BrowseRoute = BrowseRouteImport.update({
-  id: '/browse',
-  path: '/browse',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -107,46 +82,71 @@ const BlogShowcaseHackathonExperienceRoute =
     path: '/blog/showcase-hackathon-experience',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AuthenticatedSubmitRoute = AuthenticatedSubmitRouteImport.update({
+  id: '/submit',
+  path: '/submit',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSavedRoute = AuthenticatedSavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHackathonsRoute = AuthenticatedHackathonsRouteImport.update({
+  id: '/hackathons',
+  path: '/hackathons',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedBrowseRoute = AuthenticatedBrowseRouteImport.update({
+  id: '/browse',
+  path: '/browse',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/browse': typeof BrowseRoute
   '/feedback': typeof FeedbackRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/hackathons': typeof HackathonsRoute
   '/help': typeof HelpRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/saved': typeof SavedRoute
-  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/submit': typeof SubmitRoute
+  '/browse': typeof AuthenticatedBrowseRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/hackathons': typeof AuthenticatedHackathonsRoute
+  '/saved': typeof AuthenticatedSavedRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/submit': typeof AuthenticatedSubmitRoute
   '/blog/showcase-hackathon-experience': typeof BlogShowcaseHackathonExperienceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/browse': typeof BrowseRoute
   '/feedback': typeof FeedbackRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/hackathons': typeof HackathonsRoute
   '/help': typeof HelpRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/saved': typeof SavedRoute
-  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/submit': typeof SubmitRoute
+  '/browse': typeof AuthenticatedBrowseRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/hackathons': typeof AuthenticatedHackathonsRoute
+  '/saved': typeof AuthenticatedSavedRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/submit': typeof AuthenticatedSubmitRoute
   '/blog/showcase-hackathon-experience': typeof BlogShowcaseHackathonExperienceRoute
 }
 export interface FileRoutesById {
@@ -154,19 +154,19 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
-  '/browse': typeof BrowseRoute
   '/feedback': typeof FeedbackRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/hackathons': typeof HackathonsRoute
   '/help': typeof HelpRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/saved': typeof SavedRoute
-  '/settings': typeof SettingsRoute
   '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/submit': typeof SubmitRoute
+  '/_authenticated/browse': typeof AuthenticatedBrowseRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/hackathons': typeof AuthenticatedHackathonsRoute
+  '/_authenticated/saved': typeof AuthenticatedSavedRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/submit': typeof AuthenticatedSubmitRoute
   '/blog/showcase-hackathon-experience': typeof BlogShowcaseHackathonExperienceRoute
 }
 export interface FileRouteTypes {
@@ -174,56 +174,56 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/browse'
     | '/feedback'
     | '/forgot-password'
-    | '/hackathons'
     | '/help'
     | '/login'
     | '/reset-password'
-    | '/saved'
-    | '/settings'
     | '/signup'
     | '/sitemap.xml'
-    | '/submit'
+    | '/browse'
     | '/dashboard'
+    | '/hackathons'
+    | '/saved'
+    | '/settings'
+    | '/submit'
     | '/blog/showcase-hackathon-experience'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/browse'
     | '/feedback'
     | '/forgot-password'
-    | '/hackathons'
     | '/help'
     | '/login'
     | '/reset-password'
-    | '/saved'
-    | '/settings'
     | '/signup'
     | '/sitemap.xml'
-    | '/submit'
+    | '/browse'
     | '/dashboard'
+    | '/hackathons'
+    | '/saved'
+    | '/settings'
+    | '/submit'
     | '/blog/showcase-hackathon-experience'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/about'
-    | '/browse'
     | '/feedback'
     | '/forgot-password'
-    | '/hackathons'
     | '/help'
     | '/login'
     | '/reset-password'
-    | '/saved'
-    | '/settings'
     | '/signup'
     | '/sitemap.xml'
-    | '/submit'
+    | '/_authenticated/browse'
     | '/_authenticated/dashboard'
+    | '/_authenticated/hackathons'
+    | '/_authenticated/saved'
+    | '/_authenticated/settings'
+    | '/_authenticated/submit'
     | '/blog/showcase-hackathon-experience'
   fileRoutesById: FileRoutesById
 }
@@ -231,30 +231,18 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
-  BrowseRoute: typeof BrowseRoute
   FeedbackRoute: typeof FeedbackRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
-  HackathonsRoute: typeof HackathonsRoute
   HelpRoute: typeof HelpRoute
   LoginRoute: typeof LoginRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
-  SavedRoute: typeof SavedRoute
-  SettingsRoute: typeof SettingsRoute
   SignupRoute: typeof SignupRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  SubmitRoute: typeof SubmitRoute
   BlogShowcaseHackathonExperienceRoute: typeof BlogShowcaseHackathonExperienceRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/submit': {
-      id: '/submit'
-      path: '/submit'
-      fullPath: '/submit'
-      preLoaderRoute: typeof SubmitRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -267,20 +255,6 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/settings': {
-      id: '/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/saved': {
-      id: '/saved'
-      path: '/saved'
-      fullPath: '/saved'
-      preLoaderRoute: typeof SavedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -304,13 +278,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HelpRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/hackathons': {
-      id: '/hackathons'
-      path: '/hackathons'
-      fullPath: '/hackathons'
-      preLoaderRoute: typeof HackathonsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/forgot-password': {
       id: '/forgot-password'
       path: '/forgot-password'
@@ -323,13 +290,6 @@ declare module '@tanstack/react-router' {
       path: '/feedback'
       fullPath: '/feedback'
       preLoaderRoute: typeof FeedbackRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/browse': {
-      id: '/browse'
-      path: '/browse'
-      fullPath: '/browse'
-      preLoaderRoute: typeof BrowseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -360,6 +320,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogShowcaseHackathonExperienceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/submit': {
+      id: '/_authenticated/submit'
+      path: '/submit'
+      fullPath: '/submit'
+      preLoaderRoute: typeof AuthenticatedSubmitRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/saved': {
+      id: '/_authenticated/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof AuthenticatedSavedRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/hackathons': {
+      id: '/_authenticated/hackathons'
+      path: '/hackathons'
+      fullPath: '/hackathons'
+      preLoaderRoute: typeof AuthenticatedHackathonsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -367,15 +355,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/browse': {
+      id: '/_authenticated/browse'
+      path: '/browse'
+      fullPath: '/browse'
+      preLoaderRoute: typeof AuthenticatedBrowseRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedBrowseRoute: typeof AuthenticatedBrowseRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedHackathonsRoute: typeof AuthenticatedHackathonsRoute
+  AuthenticatedSavedRoute: typeof AuthenticatedSavedRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedSubmitRoute: typeof AuthenticatedSubmitRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedBrowseRoute: AuthenticatedBrowseRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedHackathonsRoute: AuthenticatedHackathonsRoute,
+  AuthenticatedSavedRoute: AuthenticatedSavedRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedSubmitRoute: AuthenticatedSubmitRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -385,18 +390,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
-  BrowseRoute: BrowseRoute,
   FeedbackRoute: FeedbackRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
-  HackathonsRoute: HackathonsRoute,
   HelpRoute: HelpRoute,
   LoginRoute: LoginRoute,
   ResetPasswordRoute: ResetPasswordRoute,
-  SavedRoute: SavedRoute,
-  SettingsRoute: SettingsRoute,
   SignupRoute: SignupRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  SubmitRoute: SubmitRoute,
   BlogShowcaseHackathonExperienceRoute: BlogShowcaseHackathonExperienceRoute,
 }
 export const routeTree = rootRouteImport

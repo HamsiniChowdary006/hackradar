@@ -4,7 +4,7 @@ import { AppShell } from "@/components/app-shell";
 import { HackathonListing } from "@/components/hackathon-listing";
 import { hackathonsQuery } from "@/lib/hackathons";
 
-export const Route = createFileRoute("/browse")({
+export const Route = createFileRoute("/_authenticated/browse")({
   loader: ({ context }) => context.queryClient.ensureQueryData(hackathonsQuery),
   head: () => ({
     meta: [

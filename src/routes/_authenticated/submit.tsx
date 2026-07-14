@@ -7,7 +7,7 @@ import { SOURCE_PLATFORMS } from "@/lib/hackathons";
 import { Lock, Send } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 
-export const Route = createFileRoute("/submit")({
+export const Route = createFileRoute("/_authenticated/submit")({
   head: () => ({
     meta: [
       { title: "Submit a Hackathon — HackRadar" },

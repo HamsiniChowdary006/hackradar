@@ -8,7 +8,7 @@ import { savedHackathonIdsQuery } from "@/lib/bookmarks";
 import { useAuth } from "@/lib/auth-context";
 import { Bookmark, Lock } from "lucide-react";
 
-export const Route = createFileRoute("/saved")({
+export const Route = createFileRoute("/_authenticated/saved")({
   loader: ({ context }) => context.queryClient.ensureQueryData(hackathonsQuery),
   head: () => ({
     meta: [

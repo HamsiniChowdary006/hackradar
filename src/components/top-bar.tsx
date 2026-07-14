@@ -1,7 +1,6 @@
 import { Search } from "lucide-react";
 import { NotificationsBell } from "./notifications-bell";
 import { UserMenu } from "./user-menu";
-import { ThemeToggle } from "./theme-toggle";
 
 export function TopBar({
   search,
@@ -30,7 +29,7 @@ export function TopBar({
             />
           </div>
         </div>
-        <ThemeToggle />
+        
         <NotificationsBell />
         <UserMenu />
       </div>

@@ -29,7 +29,7 @@ export function TopBar({
             />
           </div>
         </div>
-        <ThemeToggle />
+        
         <NotificationsBell />
         <UserMenu />
       </div>

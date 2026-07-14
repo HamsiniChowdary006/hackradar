@@ -8,7 +8,7 @@ import { HackathonListing } from "@/components/hackathon-listing";
 import { hackathonsQuery, daysUntil } from "@/lib/hackathons";
 import { useHydrated } from "@/lib/use-hydrated";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(hackathonsQuery),
   head: () => ({
     meta: [

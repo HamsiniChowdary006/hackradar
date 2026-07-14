@@ -154,13 +154,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <AuthProvider>
-          <Outlet />
-          <AuthModal />
-          <Toaster />
-        </AuthProvider>
-      </ThemeProvider>
+      <AuthProvider>
+        <Outlet />
+        <AuthModal />
+        <Toaster />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

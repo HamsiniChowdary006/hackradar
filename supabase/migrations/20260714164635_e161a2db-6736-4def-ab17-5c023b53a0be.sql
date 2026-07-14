@@ -1,0 +1,1 @@
+DELETE FROM public.hackathons WHERE scraped_at IS NULL;
